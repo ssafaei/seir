@@ -5,7 +5,7 @@ setuptools.setup(
     author_email='a.garny@auckland.ac.nz',
     description='OpenCOR-based Python script to model Covid-19 using the SEIR model',
     entry_points={
-        'console_scripts': ['seir=main'],
+        'scripts': ['seir=src/main.py'],
     },
     license='Apache 2.0',
     name='seir',
