@@ -1,67 +1,73 @@
 import opencor as oc
 
-# Open and run a 300-day simulation using the SEIR model.
 
-simulation = oc.open_simulation(
-    'https://models.physiomeproject.org/workspace/5d4/rawfile/b973009caf430b1636cfd1133a23bfd570a85691/COVIDSim.cellml')
+def main():
+    # Open and run a 300-day simulation using the SEIR model.
 
-simulation.data().set_ending_point(300)
+    simulation = oc.open_simulation(
+        'https://models.physiomeproject.org/workspace/5d4/rawfile/b973009caf430b1636cfd1133a23bfd570a85691/COVIDSim.cellml')
 
-simulation.reset() # In case another simulation had already been run.
-simulation.run()
+    simulation.data().set_ending_point(300)
 
-# Retrieve the results of the simulation.
+    simulation.reset()  # In case another simulation had already been run.
+    simulation.run()
 
-results = simulation.results()
+    # Retrieve the results of the simulation.
 
-voi = results.voi()
-states = results.states()
-algebraic = results.algebraic()
+    results = simulation.results()
 
-S = states['main/S']
-E = states['main/E']
-P = states['main/P']
-I_t = states['main/I_t']
-I_u = states['main/I_u']
-R_t = states['main/R_t']
-R_u = states['main/R_u']
+    voi = results.voi()
+    states = results.states()
+    algebraic = results.algebraic()
 
-I = algebraic['main/I']
-R = algebraic['main/R']
-D = algebraic['main/D']
-IFR = algebraic['main/IFR']
+    s = states['main/S']
+    e = states['main/E']
+    p = states['main/P']
+    i_t = states['main/I_t']
+    i_u = states['main/I_u']
+    r_t = states['main/R_t']
+    r_u = states['main/R_u']
 
-# Plot the results.
+    i = algebraic['main/I']
+    r = algebraic['main/R']
+    d = algebraic['main/D']
+    ifr = algebraic['main/IFR']
 
-import matplotlib.pyplot as plt
+    # Plot the results.
 
-plt.clf() # In case there is already a Matplotlib window.
+    import matplotlib.pyplot as plt
 
-plt.subplot(4, 1, 1)
-plt.title('SEIR model')
-plt.plot(voi.values(), S.values(), label=S.name())
-plt.plot(voi.values(), E.values(), label=E.name())
-plt.plot(voi.values(), P.values(), label=P.name())
-plt.plot(voi.values(), I.values(), label=I.name())
-plt.plot(voi.values(), R.values(), label=R.name())
-plt.plot(voi.values(), D.values(), label=D.name())
-plt.legend(loc='center left')
+    plt.clf()  # In case there is already a Matplotlib window.
 
-plt.subplot(4, 1, 2)
-plt.plot(voi.values(), I.values(), label=I.name())
-plt.plot(voi.values(), I_t.values(), label=I_t.name())
-plt.plot(voi.values(), I_u.values(), label=I_u.name())
-plt.legend(loc='center left')
+    plt.subplot(4, 1, 1)
+    plt.title('SEIR model')
+    plt.plot(voi.values(), s.values(), label=s.name())
+    plt.plot(voi.values(), e.values(), label=e.name())
+    plt.plot(voi.values(), p.values(), label=p.name())
+    plt.plot(voi.values(), i.values(), label=i.name())
+    plt.plot(voi.values(), r.values(), label=r.name())
+    plt.plot(voi.values(), d.values(), label=d.name())
+    plt.legend(loc='center left')
 
-plt.subplot(4, 1, 3)
-plt.plot(voi.values(), R.values(), label=R.name())
-plt.plot(voi.values(), R_t.values(), label=R_t.name())
-plt.plot(voi.values(), R_u.values(), label=R_u.name())
-plt.legend(loc='center left')
+    plt.subplot(4, 1, 2)
+    plt.plot(voi.values(), i.values(), label=i.name())
+    plt.plot(voi.values(), i_t.values(), label=i_t.name())
+    plt.plot(voi.values(), i_u.values(), label=i_u.name())
+    plt.legend(loc='center left')
 
-plt.subplot(4, 1, 4)
-plt.plot(voi.values(), IFR.values(), label=IFR.name())
-plt.legend(loc='center left')
-plt.xlabel('time (day)')
+    plt.subplot(4, 1, 3)
+    plt.plot(voi.values(), r.values(), label=r.name())
+    plt.plot(voi.values(), r_t.values(), label=r_t.name())
+    plt.plot(voi.values(), r_u.values(), label=r_u.name())
+    plt.legend(loc='center left')
 
-plt.show()
+    plt.subplot(4, 1, 4)
+    plt.plot(voi.values(), ifr.values(), label=ifr.name())
+    plt.legend(loc='center left')
+    plt.xlabel('time (day)')
+
+    plt.show()
+
+
+if __name__ == '__main__':
+    main()
