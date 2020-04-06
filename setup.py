@@ -11,5 +11,5 @@ setuptools.setup(
     name='seir',
     packages=setuptools.find_packages(),
     url='https://github.com/ABI-Covid-19/seir',
-    version='0.1',
+    version='0.1.0',
 )
