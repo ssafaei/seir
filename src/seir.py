@@ -2,12 +2,10 @@ import opencor as oc
 
 
 def main():
-    # Open and run a 300-day simulation using the SEIR model.
+    # Open and run the SEIR simulation.
 
     simulation = oc.open_simulation(
-        'https://models.physiomeproject.org/workspace/5d4/rawfile/b973009caf430b1636cfd1133a23bfd570a85691/COVIDSim.cellml')
-
-    simulation.data().set_ending_point(300)
+        'https://models.physiomeproject.org/workspace/5d4/rawfile/b973009caf430b1636cfd1133a23bfd570a85691/COVIDSim.sedml')
 
     simulation.reset()  # In case another simulation had already been run.
     simulation.run()
