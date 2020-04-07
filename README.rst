@@ -27,5 +27,3 @@ From OpenCOR's ``Python Console`` window::
 which should result in something like:
 
 .. image:: res/screenshot.png
-   :align: center
-   :scale: 25%
