@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PYTHON_BIN_DIR=`dirname $BASH_SOURCE`
+PYTHON_BIN_DIR=`dirname $0`
 
 if [ "`uname -s`" = "Linux" ]; then
     ROOT_DIR=$PYTHON_BIN_DIR/../..
