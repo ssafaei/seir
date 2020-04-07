@@ -1,0 +1,11 @@
+#!/bin/sh
+
+PYTHON_BIN_DIR=`dirname $BASH_SOURCE`
+
+if [ "`uname -s`" = "Linux" ]; then
+    ROOT_DIR=$PYTHON_BIN_DIR/../..
+else
+    ROOT_DIR=$PYTHON_BIN_DIR/../../../../..
+fi
+
+$ROOT_DIR/OpenCOR -c PythonShell $PYTHON_BIN_DIR/seir.py
