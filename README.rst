@@ -8,7 +8,7 @@ Install/upgrade
 
 From OpenCOR's ``Python Console`` window::
 
- !pip install --upgrade git+https://github.com/agarny/seir.git
+ !pip install --upgrade git+https://github.com/ABI-Covid-19/seir.git
 
 Uninstall
 ---------
