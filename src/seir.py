@@ -38,9 +38,9 @@ def main():
     import matplotlib.pyplot as plt
 
     plt.clf()  # In case there is already a Matplotlib window.
+    plt.gcf().canvas.set_window_title('SEIR model')
 
     plt.subplot(4, 1, 1)
-    plt.title('SEIR model')
     plt.plot(voi.values(), s.values(), label=s.name())
     plt.plot(voi.values(), e.values(), label=e.name())
     plt.plot(voi.values(), p.values(), label=p.name())
