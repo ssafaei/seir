@@ -5,7 +5,7 @@ def main():
     # Open and run the SEIR simulation.
 
     simulation = oc.open_simulation(
-        'https://models.physiomeproject.org/workspace/5d4/rawfile/b973009caf430b1636cfd1133a23bfd570a85691/COVIDSim.sedml')
+        'https://raw.githubusercontent.com/ABI-Covid-19/seir/master/models/seir.sedml')
 
     simulation.reset()  # In case another simulation had already been run.
     simulation.run()
