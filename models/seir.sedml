@@ -340,7 +340,7 @@
                     <annotation>
                         <properties xmlns="http://www.opencor.ws/">
                             <selected>true</selected>
-                            <title>P</title>
+                            <title>I_p</title>
                             <line>
                                 <style>solid</style>
                                 <width>2</width>
@@ -492,7 +492,7 @@
                     <annotation>
                         <properties xmlns="http://www.opencor.ws/">
                             <selected>true</selected>
-                            <title>I_t</title>
+                            <title>I_c</title>
                             <line>
                                 <style>solid</style>
                                 <width>2</width>
@@ -604,7 +604,7 @@
                     <annotation>
                         <properties xmlns="http://www.opencor.ws/">
                             <selected>true</selected>
-                            <title>R_t</title>
+                            <title>R_c</title>
                             <line>
                                 <style>solid</style>
                                 <width>2</width>

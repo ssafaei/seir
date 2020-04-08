@@ -20,10 +20,10 @@ def main():
 
     s = states['main/S']
     e = states['main/E']
-    p = states['main/P']
-    i_t = states['main/I_t']
+    i_c = states['main/I_c']
+    i_p = states['main/I_p']
     i_u = states['main/I_u']
-    r_t = states['main/R_t']
+    r_c = states['main/R_c']
     r_u = states['main/R_u']
 
     i = algebraic['main/I']
@@ -41,7 +41,7 @@ def main():
     plt.subplot(4, 1, 1)
     plt.plot(voi.values(), s.values(), label=s.name())
     plt.plot(voi.values(), e.values(), label=e.name())
-    plt.plot(voi.values(), p.values(), label=p.name())
+    plt.plot(voi.values(), i_p.values(), label=i_p.name())
     plt.plot(voi.values(), i.values(), label=i.name())
     plt.plot(voi.values(), r.values(), label=r.name())
     plt.plot(voi.values(), d.values(), label=d.name())
@@ -49,13 +49,13 @@ def main():
 
     plt.subplot(4, 1, 2)
     plt.plot(voi.values(), i.values(), label=i.name())
-    plt.plot(voi.values(), i_t.values(), label=i_t.name())
+    plt.plot(voi.values(), i_c.values(), label=i_c.name())
     plt.plot(voi.values(), i_u.values(), label=i_u.name())
     plt.legend(loc='center left')
 
     plt.subplot(4, 1, 3)
     plt.plot(voi.values(), r.values(), label=r.name())
-    plt.plot(voi.values(), r_t.values(), label=r_t.name())
+    plt.plot(voi.values(), r_c.values(), label=r_c.name())
     plt.plot(voi.values(), r_u.values(), label=r_u.name())
     plt.legend(loc='center left')
 
