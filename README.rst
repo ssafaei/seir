@@ -22,7 +22,7 @@ Run
 
 From OpenCOR's ``Python Console`` window::
 
- !seir
+ import os, platform; exec(open(os.environ['PYTHONHOME'] + ('/Scripts' if (platform.system() == 'Windows') else '/bin') + '/seir.py').read())
 
 which should result in something like:
 
