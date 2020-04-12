@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <model name="COVID_model" xmlns="http://www.cellml.org/cellml/1.1#" xmlns:cellml="http://www.cellml.org/cellml/1.1#" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <import xlink:href="Units.cellml">
+    <import xlink:href="units.cellml">
         <units name="day" units_ref="day"/>
         <units name="per_day" units_ref="per_day"/>
     </import>
-    <import xlink:href="Parameters.cellml">
+    <import xlink:href="parameters.cellml">
         <component component_ref="Parameters_AKL" name="Parameters_AKL"/>
         <component component_ref="Parameters_HML" name="Parameters_HML"/>
         <component component_ref="Parameters_TRG" name="Parameters_TRG"/>
