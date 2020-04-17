@@ -38,9 +38,9 @@
         <variable name="IFR" units="dimensionless"/>
         <!--/////////////// Parameters /////////////////-->
         <!-- Infection Fatality Rate (when ICU is under max capacity)-->
-        <variable initial_value="0.01" name="IFR_0" units="dimensionless"/>
+        <variable name="IFR_0" units="dimensionless"/>
         <!-- Infection Fatality Rate (for infectious exceeding ICU capacity)-->
-        <variable initial_value="0.02" name="IFR_1" units="dimensionless"/>
+        <variable name="IFR_1" units="dimensionless"/>
         <!-- Transmission Coefficient-->
         <variable name="beta" units="per_day"/>
         <!-- Relative Infectiousness in Pre-Symptomatic Period-->
@@ -60,7 +60,11 @@
         <!-- Proportion of Total Infections Requiring Hospitalisation-->
         <variable initial_value="0.05" name="p_hosp" units="dimensionless"/>
         <!-- Basic Reproduction Number-->
-        <variable initial_value="2.5" name="R_0" units="dimensionless"/>
+        <variable name="R_0" units="dimensionless"/>
+        <variable initial_value="5" name="R_0_i" units="dimensionless"/>
+        <variable initial_value="50" name="x_0" units="dimensionless"/>
+        <variable initial_value="0.5" name="R_0_e" units="dimensionless"/>
+        <variable initial_value="0.0" name="k" units="dimensionless"/>
         <!--/////////////// System of ODEs /////////////////-->
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
@@ -78,7 +82,6 @@
                         <minus/>
                         <ci>beta</ci>
                     </apply>
-                    <ci>S</ci>
                     <apply>
                         <plus/>
                         <apply>
@@ -89,6 +92,7 @@
                         <ci>I_u</ci>
                         <ci>I_c</ci>
                     </apply>
+                    <ci>S</ci>
                 </apply>
             </apply>
             <apply>
@@ -105,7 +109,6 @@
                     <apply>
                         <times/>
                         <ci>beta</ci>
-                        <ci>S</ci>
                         <apply>
                             <plus/>
                             <apply>
@@ -116,6 +119,7 @@
                             <ci>I_u</ci>
                             <ci>I_c</ci>
                         </apply>
+                        <ci>S</ci>
                     </apply>
                     <apply>
                         <times/>
@@ -208,12 +212,12 @@
                 </apply>
                 <apply>
                     <times/>
-                    <ci>gamma</ci>
                     <apply>
                         <minus/>
                         <cn cellml:units="dimensionless">1</cn>
                         <ci>IFR</ci>
                     </apply>
+                    <ci>gamma</ci>
                     <ci>I_u</ci>
                 </apply>
             </apply>
@@ -228,12 +232,12 @@
                 </apply>
                 <apply>
                     <times/>
-                    <ci>gamma</ci>
                     <apply>
                         <minus/>
                         <cn cellml:units="dimensionless">1</cn>
                         <ci>IFR</ci>
                     </apply>
+                    <ci>gamma</ci>
                     <ci>I_c</ci>
                 </apply>
             </apply>
@@ -311,48 +315,98 @@
             </apply>
             <apply>
                 <eq/>
-                <ci>IFR</ci>
-                <piecewise>
-                    <piece>
-                        <ci>IFR_0</ci>
-                        <apply>
-                            <leq/>
-                            <apply>
-                                <times/>
-                                <ci>N</ci>
-                                <ci>I</ci>
-                                <ci>p_ICU</ci>
-                            </apply>
-                            <ci>n_ICU</ci>
-                        </apply>
-                    </piece>
-                    <otherwise>
+                <ci>R_0</ci>
+                <apply>
+                    <plus/>
+                    <apply>
+                        <divide/>
                         <apply>
                             <minus/>
-                            <ci>IFR_1</ci>
+                            <ci>R_0_i</ci>
+                            <ci>R_0_e</ci>
+                        </apply>
+                        <apply>
+                            <plus/>
+                            <cn cellml:units="dimensionless">1</cn>
                             <apply>
-                                <times/>
+                                <exp/>
                                 <apply>
-                                    <divide/>
-                                    <ci>n_ICU</ci>
+                                    <times/>
                                     <apply>
-                                        <times/>
-                                        <ci>N</ci>
-                                        <ci>I</ci>
-                                        <ci>p_ICU</ci>
+                                        <minus/>
+                                        <ci>k</ci>
                                     </apply>
-                                </apply>
-                                <apply>
-                                    <minus/>
-                                    <ci>IFR_1</ci>
-                                    <ci>IFR_0</ci>
+                                    <apply>
+                                        <plus/>
+                                        <apply>
+                                            <minus/>
+                                            <ci>t</ci>
+                                        </apply>
+                                        <ci>x_0</ci>
+                                    </apply>
                                 </apply>
                             </apply>
                         </apply>
-                    </otherwise>
-                </piecewise>
+                    </apply>
+                    <ci>R_0_e</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>IFR_1</ci>
+                <apply>
+                    <times/>
+                    <cn cellml:units="dimensionless">2</cn>
+                    <ci>IFR_0</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>IFR_0</ci>
+                <apply>
+                    <plus/>
+                    <apply>
+                        <times/>
+                        <cn cellml:units="dimensionless">0.01</cn>
+                        <cn cellml:units="dimensionless">0.1</cn>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <cn cellml:units="dimensionless">0.05</cn>
+                        <cn cellml:units="dimensionless">0.3</cn>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <cn cellml:units="dimensionless">0.2</cn>
+                        <cn cellml:units="dimensionless">0.4</cn>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <cn cellml:units="dimensionless">0.3</cn>
+                        <cn cellml:units="dimensionless">0.2</cn>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>IFR</ci>
+                <apply>
+                    <plus/>
+                    <apply>
+                        <times/>
+                        <ci>S</ci>
+                        <ci>I</ci>
+                    </apply>
+                    <ci>IFR_0</ci>
+                </apply>
             </apply>
         </math>
+        <!--        IFR = sel
+            case N*I*p_ICU <= n_ICU:
+                IFR_0;
+            otherwise:
+                IFR_1-n_ICU/(N*I*p_ICU)*(IFR_1-IFR_0);
+        endsel;-->
     </component>
     <connection>
         <map_components component_1="main" component_2="environment"/>
